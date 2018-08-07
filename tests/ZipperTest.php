@@ -84,7 +84,7 @@ class ZipperTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('foo', $this->archive->getFileContent('foo'));
         $this->assertSame('foo.bar', $this->archive->getFileContent('foo.bar'));
     }
-    
+
     public function testAddAndGetWithCustomFilenameArray()
     {
         $this->file->shouldReceive('isFile')->with('foo.bar')
@@ -484,5 +484,14 @@ class ZipperTest extends \PHPUnit_Framework_TestCase
 
         $invalidPattern = 'asdasd';
         $this->archive->listFiles($invalidPattern);
+    }
+
+    public function testUnrar()
+    {
+        $path = __DIR__ . '/Mock/file.rar';
+        $zip = new Zipper();
+        $zip->rar($path);
+        $zip->extractTo(__DIR__ . '/Mock');
+        //dd($zip->listFiles());
     }
 }
